@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	topic := "my-topic"
+	topic := "topic_A"
 	partition := 0
 
 	// 连接Kafka
@@ -20,7 +20,7 @@ func main() {
 	defer conn.Close()
 
 	// 设置超时（30秒）
-	conn.SetReadDeadline(time.Now().Add(30 * time.Second))
+	conn.SetReadDeadline(time.Now().Add(10 * time.Second))
 
 	// 调整批次参数
 	batch := conn.ReadBatch(10e3, 100e3)

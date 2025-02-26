@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	topic := "my-topic1"
+	topic := "topic-F"
 	conn, err := kafka.Dial("tcp", "localhost:9092")
 	if err != nil {
 		panic(err.Error())
@@ -28,7 +28,7 @@ func main() {
 	topicConfig := []kafka.TopicConfig{
 		{
 			Topic:             topic,
-			NumPartitions:     1,
+			NumPartitions:     3,
 			ReplicationFactor: 1,
 		},
 	}
