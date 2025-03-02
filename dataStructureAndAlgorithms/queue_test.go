@@ -1,6 +1,7 @@
 package dataStructureAndAlgorithms
 
 import (
+	"fmt"
 	"reflect"
 	"sync"
 	"testing"
@@ -190,3 +191,37 @@ func TestQueue_getLen(t *testing.T) {
 		})
 	}
 }
+
+// 基准测试（用于测量和评估软件性能指标的方法）
+func BenchmarkQueue(b *testing.B) {
+	n := b.N
+	fmt.Println("n", n)
+	var wg sync.WaitGroup
+	wg.Add(n * 3)
+	q := NewQueue(10)
+	for i := 0; i < n; i++ {
+		go func() {
+			defer wg.Done()
+			q.Push(i)
+		}()
+		go func() {
+			defer wg.Done()
+			q.Poll()
+		}()
+		go func() {
+			defer wg.Done()
+			q.getLen()
+			q.getCap()
+		}()
+	}
+	wg.Wait()
+}
+
+// 基准测试参数解析
+// 参数1：BenchmarkQueue-8 GOMAXPROCS 值
+// 参数2：1803006 for 循环执行次数
+// 参数3: 675.2 ns/op 每次循环所需要花费的时间
+
+// 基准测试基本知识
+// 基准测试的时间默认为 1s
+// 结合上诉内容，说明这一次基准测试，1s 执行循环 1803006 次，每次调用花费 65.2 ns
