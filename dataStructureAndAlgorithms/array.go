@@ -50,7 +50,7 @@ func (a *Array) update(index, value int) bool {
 }
 
 func (a *Array) delete(index int) bool {
-	if index > a.len {
+	if index > len(a.arr) {
 		return false
 	}
 	for i := index; i < a.len; i++ {

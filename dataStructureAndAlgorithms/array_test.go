@@ -56,13 +56,22 @@ func TestArray_Lookup(t *testing.T) {
 		args   args
 		want   int
 	}{
-		// TODO: Add test cases.
+		{
+			name: "",
+			fields: fields{
+				len: 5,
+				arr: nil,
+			},
+			args: args{
+				index: 0,
+			},
+			want: -1,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			a := &Array{
 				len: tt.fields.len,
-				cap: tt.fields.cap,
 				arr: tt.fields.arr,
 			}
 			if got := a.Lookup(tt.args.index); got != tt.want {
@@ -87,13 +96,23 @@ func TestArray_delete(t *testing.T) {
 		args   args
 		want   bool
 	}{
-		// TODO: Add test cases.
+		{
+			name: "",
+			fields: fields{
+				len: 5,
+				cap: 0,
+				arr: nil,
+			},
+			args: args{
+				index: 0,
+			},
+			want: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			a := &Array{
 				len: tt.fields.len,
-				cap: tt.fields.cap,
 				arr: tt.fields.arr,
 			}
 			if got := a.delete(tt.args.index); got != tt.want {
@@ -119,13 +138,12 @@ func TestArray_update(t *testing.T) {
 		args   args
 		want   bool
 	}{
-		// TODO: Add test cases.
+		{},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			a := &Array{
 				len: tt.fields.len,
-				cap: tt.fields.cap,
 				arr: tt.fields.arr,
 			}
 			if got := a.update(tt.args.index, tt.args.value); got != tt.want {
@@ -151,7 +169,6 @@ func TestNewArray(t *testing.T) {
 			},
 			want: &Array{
 				len: 0,
-				cap: 10,
 				arr: make([]int, 10),
 			},
 		},
