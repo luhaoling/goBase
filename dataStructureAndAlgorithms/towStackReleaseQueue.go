@@ -1,55 +1,42 @@
 package dataStructureAndAlgorithms
 
-import "fmt"
-
 type MyQueue struct {
-	queue1 []int
-	queue2 []int
+	inStack, outStack []int
 }
 
 func Constructor() MyQueue {
-	return MyQueue{
-		queue1: []int{},
-		queue2: []int{},
+	return MyQueue{}
+}
+
+func (q *MyQueue) Push(x int) {
+	q.inStack = append(q.inStack, x)
+}
+
+func (q *MyQueue) in2out() {
+	for len(q.inStack) > 0 {
+		q.outStack = append(q.outStack, q.inStack[len(q.inStack)-1])
+		q.inStack = q.inStack[:len(q.inStack)-1]
 	}
 }
 
-func (this *MyQueue) Push(x int) {
-	this.queue2 = append(this.queue2, x)
+func (q *MyQueue) Pop() int {
+	if len(q.outStack) == 0 {
+		q.in2out()
+	}
+	x := q.outStack[len(q.outStack)-1]
+	q.outStack = q.outStack[:len(q.outStack)-1]
+	return x
 }
 
-func (this *MyQueue) Pop() int {
-	if len(this.queue1) != 0 {
-		val := this.queue1[0]
-		this.queue1 = this.queue1[1:]
-		return val
+func (q *MyQueue) Peek() int {
+	if len(q.outStack) == 0 {
+		q.in2out()
 	}
-	for _, v := range this.queue2 {
-		this.queue1 = append(this.queue1, v)
-	}
-	this.queue2 = []int{}
-	val := this.queue1[0]
-	this.queue1 = this.queue1[1:]
-	return val
+	return q.outStack[len(q.outStack)-1]
 }
 
-func (this *MyQueue) Peek() int {
-	if len(this.queue1) != 0 {
-		val := this.queue1[0]
-		return val
-	}
-	for _, v := range this.queue2 {
-		this.queue1 = append(this.queue1, v)
-	}
-	this.queue2 = []int{}
-	val := this.queue1[0]
-	return val
-}
-
-func (this *MyQueue) Empty() bool {
-	fmt.Println(this.queue1)
-	fmt.Println(this.queue2)
-	return len(this.queue1) == 0 && len(this.queue2) == 0
+func (q *MyQueue) Empty() bool {
+	return len(q.inStack) == 0 && len(q.outStack) == 0
 }
 
 /**
