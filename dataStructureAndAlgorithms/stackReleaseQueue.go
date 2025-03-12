@@ -4,11 +4,11 @@ type MyQueue struct {
 	inStack, outStack []int
 }
 
-func Constructor() MyQueue {
+func Constructor1() MyQueue {
 	return MyQueue{}
 }
 
-func (q *MyQueue) Push(x int) {
+func (q *MyQueue) Push1(x int) {
 	q.inStack = append(q.inStack, x)
 }
 
@@ -19,7 +19,7 @@ func (q *MyQueue) in2out() {
 	}
 }
 
-func (q *MyQueue) Pop() int {
+func (q *MyQueue) Pop1() int {
 	if len(q.outStack) == 0 {
 		q.in2out()
 	}
