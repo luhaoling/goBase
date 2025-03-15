@@ -60,3 +60,7 @@ func AddToCart(userID, productId int) {
 
 	log.Println("cart item add successfully")
 }
+
+//func ViewCart(userID int) []*CartItem {
+//
+//}
