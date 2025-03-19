@@ -1,4 +1,4 @@
-package dataStructureAndAlgorithms
+package linkList
 
 // release a int linked
 // 要求：
