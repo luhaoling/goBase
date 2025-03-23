@@ -23,4 +23,6 @@ func main() {
 	}()
 	fmt.Println(struct{}{} == <-ch)
 
+	c1 := context.WithValue(ctx, "key", "value")
+	fmt.Println(c1.Value("key"))
 }
