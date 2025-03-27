@@ -1,8 +1,8 @@
-package releaseMQ
+package queue
 
 import (
 	"context"
-	"github.com/redis/go-redis/v9"
+	"github.com/go-redis/redis/v8"
 	"sync"
 )
 
@@ -31,7 +31,7 @@ func NewQueue(ctx context.Context, redis *redis.Client, opts ...Option) *Queue {
 	once.Do(func() {
 		defaultOptions := Options{
 			topic:   "topic",
-			handler: defaultHander,
+			handler: defaultHandler,
 		}
 
 		for _, apply := range opts {
@@ -43,7 +43,7 @@ func NewQueue(ctx context.Context, redis *redis.Client, opts ...Option) *Queue {
 			redis:    redis,
 			topic:    defaultOptions.topic,
 			producer: NewProducer(ctx),
-			consumer: NewConsumer(ctx, defaultOptions.Handler),
+			consumer: NewConsumer(ctx, defaultOptions.handler),
 		}
 
 	})
@@ -58,4 +58,3 @@ func (q *Queue) Start() {
 func (q *Queue) Publish(msg *Message) (int64, error) {
 	return q.producer.publish(q.redis, q.topic, msg)
 }
-

@@ -1,4 +1,4 @@
-package releaseMQ
+package queue
 
 import (
 	"encoding/json"

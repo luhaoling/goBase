@@ -1,4 +1,4 @@
-package releaseMQ
+package queue
 
 type Option func(*Options)
 
