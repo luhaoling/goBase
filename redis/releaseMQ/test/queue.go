@@ -1,20 +1,17 @@
-package test
+package main
 
 import (
 	"context"
 	"fmt"
 	"github.com/go-redis/redis/v8"
-	uuid "github.com/satori/go.uuid"
 	queue "goBase/redis/releaseMQ"
 	"log"
-	"testing"
-	"time"
 )
 
 var RedisQueue *queue.Queue
 var Redis *redis.Client
 
-func TestQueue(t *testing.T) {
+func main() {
 	option := &redis.Options{
 		Addr:     "localhost:6379",
 		Password: "",
@@ -31,17 +28,6 @@ func TestQueue(t *testing.T) {
 }
 
 func InitRedisQueue() {
-	RedisQueue = queue.NewQueue(context.Background(), Redis, queue.WithTopic("send-message"))
+	RedisQueue = queue.NewQueue(context.Background(), Redis, queue.WithTopic("topic"))
 	RedisQueue.Start()
-}
-
-func CreateAndSendMessages() {
-	id := uuid.NewV4().String()
-	logMsg := queue.NewMessage(id, time.Now(), map[string]interface{}{"user_id": 123, "action": "login"})
-
-	qu := queue.Queue{}
-	_, err := qu.Publish(logMsg)
-	if err != nil {
-		fmt.Println("send ", err)
-	}
 }
