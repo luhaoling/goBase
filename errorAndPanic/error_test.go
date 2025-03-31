@@ -1,6 +1,8 @@
-package error
+package errorAndPanic
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestA(t *testing.T) {
 	b := BizError{

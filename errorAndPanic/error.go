@@ -1,4 +1,4 @@
-package error
+package errorAndPanic
 
 import (
 	"errors"
