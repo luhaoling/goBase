@@ -45,10 +45,10 @@ func BenchmarkMapSafe(b *testing.B) {
 	}
 }
 
-func genNoRepeatTestCase1(num int) []Elem {
-	elem := make([]Elem, num)
+func genNoRepeatTestCase1(num int) []Elem1 {
+	elem := make([]Elem1, num)
 	for i := 0; i < num; i++ {
-		elem[i] = Elem{
+		elem[i] = Elem1{
 			Key: strconv.Itoa(i),
 			Val: i,
 		}

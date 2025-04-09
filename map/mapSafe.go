@@ -4,25 +4,24 @@ import "sync"
 
 type MapRMutex struct {
 	m map[string]interface{}
-	sync.RWMutex
+	sync.Mutex
 }
 
 func NewMapRMutex() MapRMutex {
 	return MapRMutex{
-		m:       make(map[string]interface{}),
-		RWMutex: sync.RWMutex{},
+		m: make(map[string]interface{}),
 	}
 }
 
-func (m MapRMutex) Set(key string, value interface{}) {
+func (m *MapRMutex) Set(key string, value interface{}) {
 	m.Lock()
 	m.m[key] = value
 	m.Unlock()
 }
 
-func (m MapRMutex) Get(key string) (interface{}, bool) {
-	m.RLock()
+func (m *MapRMutex) Get(key string) (interface{}, bool) {
+	m.Lock()
 	val, ok := m.m[key]
-	m.RUnlock()
+	m.Unlock()
 	return val, ok
 }
