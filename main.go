@@ -1,21 +1,10 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 )
 
 func main() {
-	fmt.Println("main start")
-
-	go forloop()
-	fmt.Println("wait")
-
-	input := bufio.NewScanner(os.Stdin)
-
-	input.Scan()
-	fmt.Println("main over")
 
 }
 
