@@ -10,6 +10,7 @@ require (
 	github.com/hibiken/asynq v0.24.1
 	github.com/mkevac/debugcharts v0.0.0-20191222103121-ae1c48aa8615
 	github.com/nsqio/go-nsq v1.1.0
+	github.com/orcaman/concurrent-map/v2 v2.0.1
 	github.com/petermattis/goid v0.0.0-20250319124200-ccd6737f222a
 	github.com/redis/go-redis/v9 v9.0.3
 	github.com/satori/go.uuid v1.2.0
